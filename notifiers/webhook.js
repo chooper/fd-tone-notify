@@ -42,7 +42,7 @@ async function postMultiPartFormDataWithFile({address, headers={}, timestamp, to
     form.append('matchAverages', matchAverages.toString());
     form.append('detectorName', detectorName);
     form.append('custom', JSON.stringify(custom));
-    form.append(isTest, isTest);
+    form.append('isTest', isTest);
 
     const buffer = fs.readFileSync(recordingRelPath);
         form.append('file', buffer, {
