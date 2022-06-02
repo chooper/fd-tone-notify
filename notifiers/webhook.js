@@ -4,10 +4,12 @@ const FormData = require('form-data');
 const path = require('path');
 const CUSTOM_ENV_VAR_PREFIX = "CUSTOM_ENV_VAR_";
 const log = require('../util/logger');
+const { time } = require('console');
 
 async function postJson({address, headers={}, timestamp, tones, matchAverages, filename, detectorName, custom}) {
     _fillEnvVarsHeaders(headers);
 
+    timestamp = timestamp.UTC()
     const postBody = {
         timestamp,
         tones,
@@ -35,7 +37,7 @@ async function postMultiPartFormDataWithFile({address, headers={}, timestamp, to
 
     _fillEnvVarsHeaders(headers);
     const form = new FormData();
-    form.append('timestamp', timestamp);
+    form.append('timestamp', timestamp.UTC());
     form.append('tones', tones.toString());
     form.append('matchAverages', matchAverages.toString());
     form.append('detectorName', detectorName);
